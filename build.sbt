@@ -53,14 +53,17 @@ lazy val root = (project in file("."))
       "org.apache.spark" %% "spark-sql" % sparkVersion % "provided,test",
       "org.apache.spark" %% "spark-catalyst" % sparkVersion % "provided,test"
     ),
+    dependencyOverrides ++= Set(
+      "io.grpc" % "grpc-core" % "1.61.0",
+      "io.grpc" % "grpc-protobuf" % "1.61.0",
+      "io.grpc" % "grpc-stub" % "1.61.0",
+      "io.grpc" % "grpc-netty" % "1.61.0"
+    ),
     Test / fork := true,
     assembly / assemblyShadeRules := Seq(
-      ShadeRule
-        .rename("com.google.protobuf.**" -> "shaded.protobuf.@1")
-        .inAll,
-      ShadeRule
-        .rename("com.google.common.**" -> "shaded.guava.@1")
-        .inAll
+      ShadeRule.rename("com.google.protobuf.**" -> "shaded.protobuf.@1").inAll,
+      ShadeRule.rename("com.google.common.**" -> "shaded.guava.@1").inAll,
+      ShadeRule.rename("io.grpc.**" -> "shaded.grpc.@1").inAll
     ),
     assembly / assemblyMergeStrategy := {
       case PathList("META-INF", xs@_*) => MergeStrategy.concat
