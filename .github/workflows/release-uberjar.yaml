@@ -34,9 +34,9 @@ jobs:
       - name: Output Version
         run: echo "JAR_VERSION=${{ steps.version.outputs.snapshot }}" >> $GITHUB_ENV
 
-      - name: Publish Uber JAR
-        uses: actions/upload-artifact@v2
+      - name: Upload Uber JAR
+        uses: actions/upload-artifact@v3
         with:
-          name: spark-pinecone-uber-jar-custom.jar
-          path: /home/runner/work/spark-pinecone/spark-pinecone/target/scala-2.12/spark-pinecone-custom.jar
+          name: spark-pinecone-uber-jar
+          path: target/scala-2.12/*.jar
 
