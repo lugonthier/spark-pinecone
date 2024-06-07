@@ -53,7 +53,7 @@ lazy val root = (project in file("."))
       "org.apache.spark" %% "spark-sql" % sparkVersion % "provided,test",
       "org.apache.spark" %% "spark-catalyst" % sparkVersion % "provided,test"
     ),
-    dependencyOverrides ++= Set(
+    dependencyOverrides ++= Seq(
       "io.grpc" % "grpc-core" % "1.61.0",
       "io.grpc" % "grpc-protobuf" % "1.61.0",
       "io.grpc" % "grpc-stub" % "1.61.0",
